@@ -16,8 +16,8 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-type", "application/json")
         self.end_headers()
-        response_content = {"status": "OK"}
-        self.wfile.write(json.dump(response_content))
+        response_content = json.dumps({"status": "OK"}).encode("utf-8")
+        self.wfile.write(response_content)
 
 def run() -> None:
     """
