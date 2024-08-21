@@ -1,6 +1,7 @@
 """
 Package for health check
 """
+import json
 import http.server
 import socketserver
 
@@ -13,10 +14,10 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         predefined method to execute on GET requests
         """
         self.send_response(200)
-        self.send_header("Content-type", "text/html")
+        self.send_header("Content-type", "application/json")
         self.end_headers()
-        response_content = "<html><body><h1>Hello, World!</h1></body></html>"
-        self.wfile.write(response_content.encode('utf-8'))
+        response_content = {"status": "OK"}
+        self.wfile.write(json.dump(response_content))
 
 def run() -> None:
     """
